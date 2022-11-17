@@ -1,0 +1,25 @@
+import {  MongoRepository,Equal } from "typeorm";
+import {hash} from 'bcrypt'
+import { IUserRepository,IUserDTO } from "../IUserRepository";
+import { dataSource } from "../../../database";
+import { User } from "../../models/User";
+
+export class UserRepository implements IUserRepository{
+    private appData:MongoRepository<User>
+
+    constructor(){
+        this.appData = dataSource.getMongoRepository(User)
+    }
+
+    async create({ email, password }: IUserDTO): Promise<void> {
+        const hashPassword =await hash(password,258)
+        await this.appData.save({email,password:hashPassword})
+
+    }
+
+    async findByEmail(email:string): Promise<User | null> {
+
+        return await this.appData.findOneBy({email})
+    }
+    
+}
