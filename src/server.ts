@@ -10,10 +10,12 @@ dataSource.initialize().then(runDB).catch(error=>console.error(error)).then(
 )
 
 async function runDB(){
- await dataSource.runMigrations()
+    console.log('rodando migrate')
+ //await dataSource.runMigrations()
 }
 
 function run(){
+    console.log('iniciando api')
     const app = express()
     app.use(express.json())
     app.use(router)

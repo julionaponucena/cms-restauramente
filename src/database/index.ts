@@ -2,11 +2,13 @@ import 'reflect-metadata'
 import { DataSource } from "typeorm";
 import { Post } from '../modules/models/Post';
 import { User } from "../modules/models/User";
+import {config} from 'dotenv'
+
+config()
 
 export const dataSource = new DataSource({
     type:"mongodb",
-    host:"localhost",
-    port:27017 ,
+    url:process.env.MONGO_URL,
     database:'teste',
     synchronize:true,
     logging:['query','error'],

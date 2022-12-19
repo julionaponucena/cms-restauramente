@@ -2,6 +2,7 @@ import { inject,injectable } from "tsyringe";
 import { IUserDTO, IUserRepository } from "../../repository/IUserRepository";
 import { AppError } from "../../../erros/AppError";
 import { IUserService } from "../IUserService";
+import { User } from "../../models/User";
 
 @injectable()
 export class UserService implements IUserService{
@@ -19,6 +20,10 @@ export class UserService implements IUserService{
         }
 
         await this.userRepository.create({email,password})
+    }
+
+    async findOneByEmail(email: string): Promise<User | null> {
+        return await this.userRepository.findByEmail(email)
     }
 
         

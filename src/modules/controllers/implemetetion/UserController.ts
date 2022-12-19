@@ -7,7 +7,7 @@ export class UserController{
     private userService:IUserService
     constructor(){
         this.userService = container.resolve<IUserService>(UserService)
-        //this.userService.create({email:'asdsadas',password:'123'})
+       
     }
 
     async post(request:Request,response:Response):Promise<Response>{

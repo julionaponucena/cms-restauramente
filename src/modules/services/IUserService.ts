@@ -4,5 +4,5 @@ import { User } from "../models/User"
 export interface IUserService {
     create({email,password}:IUserDTO):Promise<void>
 
-    //findOneByEmail(email :string):Promise<User | null>
+    findOneByEmail(email :string):Promise<User | null>
 }
