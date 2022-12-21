@@ -1,8 +1,9 @@
 import { inject,injectable } from "tsyringe";
-import { IUserDTO, IUserRepository } from "../../repository/IUserRepository";
+import {  IUserRepository } from "../../repository/IUserRepository";
+import { CreateUserDTO } from "../../dtos/UserDto";
+import { ListUserDto } from "../../dtos/ListUserDto";
 import { AppError } from "../../../erros/AppError";
 import { IUserService } from "../IUserService";
-import { User } from "../../models/User";
 
 @injectable()
 export class UserService implements IUserService{
@@ -11,7 +12,7 @@ export class UserService implements IUserService{
         @inject('UserRepository')
         private userRepository:IUserRepository){}
 
-    async create({ email, password }: IUserDTO): Promise<void> {
+    async create({ email, password }: CreateUserDTO): Promise<void> {
        
         const alredyExist =await this.userRepository.findByEmail(email)
 
@@ -22,8 +23,13 @@ export class UserService implements IUserService{
         await this.userRepository.create({email,password})
     }
 
-    async findOneByEmail(email: string): Promise<User | null> {
-        return await this.userRepository.findByEmail(email)
+    async findOneByEmail(email: string): Promise<ListUserDto | null> {
+        const user = await this.userRepository.findByEmail(email)
+        
+        if(!user){
+            return null
+        }
+        return new ListUserDto({id:user.id.toString(),email:user.email,password:user.password})
     }
 
         

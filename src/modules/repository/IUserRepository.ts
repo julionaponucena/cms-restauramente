@@ -1,11 +1,9 @@
 import { User } from "../models/User"
+import { CreateUserDTO } from "../dtos/UserDto"
 
-export interface IUserDTO{
-    email:string,
-    password:string
-}
+
 
 export interface IUserRepository {
-     create({email,password}:IUserDTO):Promise<void>
+     create({email,password}:CreateUserDTO):Promise<void>
      findByEmail(email :string):Promise<User | null>
 }

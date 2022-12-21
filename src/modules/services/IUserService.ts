@@ -1,8 +1,8 @@
-import { IUserDTO } from "../repository/IUserRepository"
-import { User } from "../models/User"
+import { CreateUserDTO } from "../dtos/UserDto"
+import { ListUserDto } from "../dtos/ListUserDto"
 
 export interface IUserService {
-    create({email,password}:IUserDTO):Promise<void>
+    create({email,password}:CreateUserDTO):Promise<void>
 
-    findOneByEmail(email :string):Promise<User | null>
+    findOneByEmail(email :string):Promise<ListUserDto | null>
 }
