@@ -3,9 +3,11 @@ import postController from "../modules/controllers/PostController";
 import createPostController from "../modules/controllers/CreatePostController";
 import listPostsController from "../modules/controllers/ListPostsController";
 import updatePostController from "../modules/controllers/UpdatePostController"
+import { authentication } from "../middlewares/authentication";
 
 const postRouter = Router()
 
+postRouter.use(authentication)
 postRouter.get('/',(req,res)=>listPostsController.handle(req,res))
 
 postRouter.post('/',(req,res)=>createPostController.handle(req,res))

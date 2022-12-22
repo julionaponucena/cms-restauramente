@@ -1,11 +1,11 @@
-import { Entity,Column,ObjectIdColumn, Not } from "typeorm";
-import {ObjectID} from "mongodb"
+import { Entity,Column,ObjectIdColumn,  } from "typeorm";
+import {ObjectId} from "mongodb"
 import { IPostDTO } from "../repository/IPostRespository";
 
 @Entity("Posts")
 export class Post{
     @ObjectIdColumn()
-    id:ObjectID
+    id:ObjectId
     @Column({nullable:true,unique:true})
     title:string
 
@@ -21,7 +21,7 @@ export class Post{
     @Column()
     content:string
 
-    constructor(id:ObjectID,t:string,isP:boolean,metaD:string,metaK:string,c:string){
+    constructor(id:ObjectId,t:string,isP:boolean,metaD:string,metaK:string,c:string){
         this.id = id
         this.title = t
         this.isPublicated = isP

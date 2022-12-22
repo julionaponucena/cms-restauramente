@@ -12,8 +12,9 @@ export class AuthController{
     }
 
     async handle(request:Request,response:Response):Promise<Response>{
-
-        return response.status(200).send()
+        const {email,password} = request.body
+        const tokenResponse =await this.authService.login({email,password})
+        return response.status(200).json(tokenResponse)
     }
 }
 

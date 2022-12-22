@@ -1,6 +1,7 @@
 import 'reflect-metadata'
 import { AppError } from '../../../erros/AppError'
 import { IFindUserService } from "../IFindUserService"
+import { ResponseLogin } from '../IAuthService'
 import { AuthService } from "./AuthService"
 
 
@@ -14,7 +15,6 @@ const findUserServiceMock : jest.Mocked<IFindUserService>={
 describe('test AuthService',()=>{
     
     it('should not be able to generate jwt if email of user are incorrect',()=>{
-        
         
         findUserServiceMock.findByEmail.mockResolvedValue(null)
        const authService = new AuthService(findUserServiceMock)
@@ -37,5 +37,21 @@ describe('test AuthService',()=>{
         expect(() =>authService.login({email,password})).rejects.toBeInstanceOf(AppError)
        
        
-    }) 
+    })
+    
+    it('should be able to create token and refresh tokens if the email and users are correct',async ()=>{
+        findUserServiceMock.findByEmail.mockResolvedValue(Promise.resolve({id:"1",
+        email:"teste@example.com",
+        password:"$2a$12$3wfmj5LTZwNpLTNfBJPRbuuIXl8tN8IjaIqy9FqT3KFpcIzlN6oPG"
+        }))
+        const authService = new AuthService(findUserServiceMock)
+
+        const response =await authService.login({email:"teste@example.com",password:"123"})
+
+        expect(response).toHaveProperty('token')
+        expect(typeof response.token).toBe('string')
+        expect(typeof response.refreshToken).toBe('string')
+        expect(response).toHaveProperty('refreshToken')
+        expect(findUserServiceMock.findByEmail).toBeCalled()
+    })
 })

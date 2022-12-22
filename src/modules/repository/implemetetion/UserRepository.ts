@@ -1,10 +1,12 @@
 import {  MongoRepository,Equal } from "typeorm";
+import { injectable, singleton } from "tsyringe";
 import {hash} from 'bcrypt'
 import { IUserRepository } from "../IUserRepository";
 import { CreateUserDTO } from "../../dtos/UserDto";
 import { dataSource } from "../../../database";
 import { User } from "../../models/User";
 
+@injectable()
 export class UserRepository implements IUserRepository{
     private appData:MongoRepository<User>
 

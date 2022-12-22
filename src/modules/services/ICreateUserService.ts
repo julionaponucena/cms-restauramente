@@ -1,5 +1,5 @@
-import { IUserDTO } from "../repository/IUserRepository";
+import{CreateUserDTO} from '../dtos/UserDto'
 
 export interface ICreateUserService{
-    execute({email,password}:IUserDTO):Promise<void>
+    execute({email,password}:CreateUserDTO):Promise<void>
 }

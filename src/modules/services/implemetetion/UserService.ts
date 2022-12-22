@@ -1,16 +1,17 @@
-import { inject,injectable } from "tsyringe";
+import { container, inject,injectable } from "tsyringe";
 import {  IUserRepository } from "../../repository/IUserRepository";
 import { CreateUserDTO } from "../../dtos/UserDto";
 import { ListUserDto } from "../../dtos/ListUserDto";
 import { AppError } from "../../../erros/AppError";
 import { IUserService } from "../IUserService";
+import { UserRepository } from "../../repository/implemetetion/UserRepository";
 
 @injectable()
 export class UserService implements IUserService{
-
-    constructor(
-        @inject('UserRepository')
-        private userRepository:IUserRepository){}
+    private userRepository:IUserRepository
+    constructor(){
+        this.userRepository = container.resolve(UserRepository)
+    }
 
     async create({ email, password }: CreateUserDTO): Promise<void> {
        

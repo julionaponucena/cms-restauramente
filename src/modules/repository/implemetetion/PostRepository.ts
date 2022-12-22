@@ -2,7 +2,7 @@ import {MongoRepository} from 'typeorm'
 import { IPostDTO, IPostRepository } from "../IPostRespository";
 import { Post } from '../../models/Post';
 import { dataSource } from '../../../database';
-import {ObjectID} from 'mongodb'
+import {ObjectId} from 'mongodb'
 
 export class PostRepository implements IPostRepository{
     private appData:MongoRepository<Post>
@@ -22,7 +22,7 @@ export class PostRepository implements IPostRepository{
     async findById(id:string):Promise<Post |null>{
        
         
-        return await this.appData.findOneBy({_id:new ObjectID(id)})
+        return await this.appData.findOneBy({_id:new ObjectId(id)})
     }
 
     async list(): Promise<Post[]> {
@@ -31,13 +31,13 @@ export class PostRepository implements IPostRepository{
 
     async update({id,title,content}:IPostDTO):Promise<void>{
         
-        await this.appData.findOneAndUpdate({_id:new ObjectID(id)},
+        await this.appData.findOneAndUpdate({_id:new ObjectId(id)},
         {$set:{title,content}})
        
     }
 
     async deleteById(id :string):Promise<void>{
-        await this.appData.findOneAndDelete({_id:new ObjectID(id)})
+        await this.appData.findOneAndDelete({_id:new ObjectId(id)})
         
     }
 }

@@ -1,0 +1,27 @@
+import { NextFunction, Request, Response } from "express";
+import { verify } from "jsonwebtoken";
+import { AppError } from "../erros/AppError";
+
+export function authentication (request: Request,response: Response, next:NextFunction){
+    const authToken = request.headers.authorization
+    
+    if(!authToken){
+        throw new AppError('token is missing',401)
+    }
+
+    const token = authToken.split(' ')[1]
+
+    const secretToken = process.env.SECRET_AUTH_TOKEN
+
+    if(!secretToken){
+        throw new AppError('internal server error',500)
+    }
+
+    try{
+        verify(token,secretToken)
+        return next()
+    }catch(error){
+        throw new AppError('token invalid',401)
+    }
+
+}
