@@ -1,5 +1,6 @@
 import 'reflect-metadata'
 import 'express-async-errors'
+import './shared/container/'
 import { dataSource } from "./database";
 import { router } from "./routes";
 import { errorMidleware } from './middlewares/error';

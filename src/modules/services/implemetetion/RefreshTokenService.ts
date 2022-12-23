@@ -1,3 +1,4 @@
+import 'reflect-metadata'
 import { verify,sign } from "jsonwebtoken";
 import { injectable } from "tsyringe";
 import { AppError } from "../../../erros/AppError";

@@ -1,5 +1,5 @@
 import 'reflect-metadata'
-import { container, injectable } from "tsyringe";
+import { autoInjectable, container, inject, injectable, registry } from "tsyringe";
 import {compare,} from 'bcrypt'
 import {sign} from 'jsonwebtoken'
 import { AppError } from "../../../erros/AppError";
@@ -16,13 +16,18 @@ import { IUserService } from '../IUserService';
 
 
 
-config()
+
 @injectable()
+@registry([{token:'findUser',useClass:FindUserService},{token:'gen',useClass:GenerateRefreshToken}])
 export class AuthService implements IAuthService{
     //private findUserService:IFindUserService
     //private generateRefreshToken : IGenerateRefreshToken
-    constructor(private findUserService:IFindUserService = container.resolve(FindUserService),
-        private generateRefreshToken:IGenerateRefreshToken = container.resolve(GenerateRefreshToken)){}
+    constructor(@inject('findUser') private findUserService:IFindUserService,@inject('gen') private generateRefreshToken:IGenerateRefreshToken){
+        
+        
+    }
+
+   
     async login({ email, password }: CreateUserDTO): Promise<ResponseLogin> {
         const user =await this.findUserService.findByEmail(email)
 

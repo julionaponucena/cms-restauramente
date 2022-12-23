@@ -1,20 +1,20 @@
-import {Entity,Column,ObjectID,ObjectIdColumn} from 'typeorm'
+import {Entity,Column,ObjectIdColumn} from 'typeorm'
 
 @Entity("User")
 export class User{
 
     @ObjectIdColumn()
-    id:ObjectID
+    _id:string
     @Column()
      email:string
 
     @Column()
      password:string
 
-    constructor(email:string,password:string,id:ObjectID){
+    constructor(email:string,password:string,id:string){
         this.email = email
         this.password= password
-        this.id=id
+        this._id=id
     }
 
     

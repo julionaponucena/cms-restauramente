@@ -1,15 +1,18 @@
-import { inject, injectable } from "tsyringe";
+import { container, inject, injectable, registry,autoInjectable } from "tsyringe";
+import { CreateUserDTO } from "../../dtos/UserDto";
+import { UserRepository } from "../../repository/implemetetion/UserRepository";
 import { IPostDTO, IPostRepository } from "../../repository/IPostRespository";
+import { IUserRepository } from "../../repository/IUserRepository";
 import { ICreatePostService } from "../ICreatePostService";
+import { ICreateUserService } from "../ICreateUserService";
 
-@injectable()
-export class CreateUserService implements ICreatePostService{
+@autoInjectable()
+@registry([{token:'usrRepo',useClass:UserRepository}])
+export class CreateUserService implements ICreateUserService{
 
-    constructor(
-        @inject('PostRepository')
-        private postRepository : IPostRepository){}
+    constructor(@inject('usrRepo') private userRepository : IUserRepository){}
 
-    async execute(post: IPostDTO): Promise<void> {
-        
+    async execute(user: CreateUserDTO): Promise<void> {
+        await this.userRepository.create(user)
     }
 }

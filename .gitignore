@@ -3,3 +3,4 @@ hooks
 info
 .env
 .vscode
+coverage

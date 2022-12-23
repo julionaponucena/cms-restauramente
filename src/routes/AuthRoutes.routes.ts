@@ -1,10 +1,11 @@
 import 'reflect-metadata'
+import '../shared/container/'
 import { Router } from 'express'
-import {AuthController} from '../modules/controllers/AuthController'
+import authController from '../modules/controllers/AuthController'
 
 const authRoutes = Router()
 console.log('chegou routes')
-const authController = new AuthController()
+
 authRoutes.post('/',(req,res)=>authController.handle(req,res))
 
 export {authRoutes}
