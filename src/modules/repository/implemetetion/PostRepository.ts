@@ -1,5 +1,6 @@
-import {MongoRepository} from 'typeorm'
+import {MongoRepository,} from 'typeorm'
 import { IPostDTO, IPostRepository } from "../IPostRespository";
+import { ICreatePostDTO } from '../../dtos/CreatePostDto';
 import { Post } from '../../models/Post';
 import { dataSource } from '../../../database';
 import {ObjectId} from 'mongodb'
@@ -11,7 +12,7 @@ export class PostRepository implements IPostRepository{
         this.appData = dataSource.getMongoRepository(Post) 
     }
 
-    async create({ title, content, metaKey, metaDescription }: IPostDTO): Promise<void> {
+    async create({ title, content, metaKey, metaDescription }: ICreatePostDTO): Promise<void> {
         await this.appData.save({title,content,metaKey,metaDescription})
     }
 

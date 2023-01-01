@@ -1,10 +1,10 @@
 import 'reflect-metadata'
 import 'express-async-errors'
 import './shared/container/'
+import {graphqlHTTP} from 'express-graphql'
 import { dataSource } from "./database";
-import { router } from "./routes";
-import { errorMidleware } from './middlewares/error';
-import express from "express"
+import { app } from './app';
+import {getSchema} from './routes/GraphqlRoutes'
 
 dataSource.initialize().then(runDB).catch(error=>console.error(error)).then(
     run
@@ -15,12 +15,11 @@ async function runDB(){
  //await dataSource.runMigrations()
 }
 
-function run(){
+async function run(){
+    const schema = await getSchema()
+    app.use('/graphql',graphqlHTTP({schema}))
     console.log('iniciando api')
-    const app = express()
-    app.use(express.json())
-    app.use(router)
-    app.use(errorMidleware)
+    
+   app.listen(3333,()=>console.log('api rodando!'))
 
-    app.listen(3333,()=>console.log("api rodando!"))
 }

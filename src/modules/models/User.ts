@@ -4,7 +4,7 @@ import {Entity,Column,ObjectIdColumn} from 'typeorm'
 export class User{
 
     @ObjectIdColumn()
-    _id:string
+    id:string
     @Column()
      email:string
 
@@ -14,7 +14,7 @@ export class User{
     constructor(email:string,password:string,id:string){
         this.email = email
         this.password= password
-        this._id=id
+        this.id=id
     }
 
     

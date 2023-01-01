@@ -12,6 +12,8 @@ export class RefreshToken implements IRefreshToken{
         if(!secretRefreshToken){
             throw new AppError('dont eable to create refresh token',500)
         }
+        let token:string =''
+        try{
         const decoded = verify(refresh_token,secretRefreshToken)
         
         const secretAuthToken = process.env.SECRET_AUTH_TOKEN
@@ -20,10 +22,17 @@ export class RefreshToken implements IRefreshToken{
             throw new AppError('dont eable to create refresh token',500)
         }
         
-        const token = sign({},secretAuthToken,{
+        const tokenContent = sign({},secretAuthToken,{
             expiresIn:'30s',
             subject:decoded.sub?.toString()
         })
+
+        token = tokenContent
+    }catch(error){
+        throw new AppError('token invalid',401)
+    }
+        if(!token)throw new AppError('internal server error',500)
+
 
         return {token}
     }

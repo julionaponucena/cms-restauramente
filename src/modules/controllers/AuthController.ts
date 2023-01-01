@@ -1,3 +1,4 @@
+import 'reflect-metadata'
 import { Request, Response } from "express";
 import { autoInjectable, container, inject, registry } from "tsyringe";
 import { AppError } from "../../erros/AppError";
@@ -11,19 +12,21 @@ import { FindUserService } from "../services/implemetetion/FindUserService";
 export class AuthController{
     
     constructor(@inject('authService') private authService? : IAuthService){
-        console.log('chegou controller')
+        
         this.authService = authService
        
     }
 
     async handle(request:Request,response:Response):Promise<Response>{
+        console.log('chamou o método handle')
         if(!this.authService){
             throw new AppError('internal server error',500)
         }
         const {email,password} = request.body
-        const tokenResponse =await this.authService.login({email,password})
-        return response.status(200).json(tokenResponse)
+        const {token,refreshToken} =await this.authService.login({email,password})
+        response.cookie('refresh-token',refreshToken,{httpOnly:true})
+        return response.status(200).json({token})
     }
 }
 
-export default container.resolve(AuthController)
+export default new AuthController()

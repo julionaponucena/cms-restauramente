@@ -25,8 +25,7 @@ export class PostService implements IPostService {
     async update(post :IPostDTO):Promise<void>{
         
         const actualPost =await this.postRepository.findById(post.id)
-        console.log(actualPost)
-        actualPost?.update(post)
+        
         
         if(actualPost){
         await this.postRepository.update(post)

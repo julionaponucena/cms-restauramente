@@ -1,3 +1,4 @@
+import 'reflect-metadata'
 import { inject, injectable } from "tsyringe";
 import { IPostDTO, IPostRepository } from "../../repository/IPostRespository";
 import { IUpdatePostService } from "../IUpdatePostService";
@@ -9,11 +10,6 @@ export class UpdatePostService implements IUpdatePostService{
         private postRepository : IPostRepository){}
 
     async execute(post: IPostDTO): Promise<void> {
-        const alredyExist = await this.postRepository.findByTitle(post.title)
-
-        if(alredyExist){
-            throw new Error('Um post com esse titulo já existe')
-        }
-        await this.postRepository.create(post)
+        await this.postRepository.update(post)
     }
 }

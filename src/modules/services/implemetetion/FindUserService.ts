@@ -13,11 +13,12 @@ import { IFindUserService } from "../IFindUserService";
 export class FindUserService implements IFindUserService{
     //userRepository : IUserRepository
     constructor(@inject('userRepository') private userRepository? : IUserRepository){
-        console.log('chegou user repository')
+        
           
         }
 
     async findByEmail(email: string): Promise<IListUserDto | null> {
+        console.log('chamou service')
         if(!this.userRepository){
             throw new AppError('internal server error',500)
         }
@@ -27,6 +28,6 @@ export class FindUserService implements IFindUserService{
             return null
         }
         
-        return {id:user._id.toString(),email:user.email,password:user.password}
+        return {id:user.id.toString(),email:user.email,password:user.password}
     }
 }

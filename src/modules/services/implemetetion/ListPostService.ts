@@ -1,3 +1,4 @@
+import 'reflect-metadata'
 import { inject, injectable } from "tsyringe";
 import { IPostRepository } from "../../repository/IPostRespository";
 import { IPostService } from "../IPostService";

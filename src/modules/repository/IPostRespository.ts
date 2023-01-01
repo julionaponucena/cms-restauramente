@@ -1,5 +1,6 @@
 import {ObjectID} from 'typeorm'
 import { Post } from "../models/Post"
+import{ICreatePostDTO} from '../dtos/CreatePostDto'
 
 export interface IPostDTO{
     id:string
@@ -10,7 +11,7 @@ export interface IPostDTO{
 }
 
 export interface IPostRepository{
-    create({title,content,metaKey,metaDescription}:IPostDTO):Promise<void>
+    create({title,content,metaKey,metaDescription}:ICreatePostDTO):Promise<void>
 
     findByTitle(title :string):Promise<Post | null>
 

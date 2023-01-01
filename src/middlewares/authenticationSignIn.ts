@@ -1,7 +1,9 @@
 import { NextFunction, Request, Response } from "express";
 import { verify } from "jsonwebtoken";
 import { AppError } from "../erros/AppError";
+import { config } from "dotenv";
 
+config()
 export function authenticationSignIn(request:Request,response:Response,next:NextFunction){
     const signInToken = request.headers.authorization
 

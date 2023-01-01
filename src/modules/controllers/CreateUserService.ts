@@ -1,3 +1,4 @@
+import 'reflect-metadata'
 import { Request, Response } from "express";
 import { autoInjectable, container, inject, registry } from "tsyringe";
 import { AppError } from "../../erros/AppError";

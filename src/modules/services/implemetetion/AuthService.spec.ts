@@ -4,7 +4,7 @@ import { IFindUserService } from "../IFindUserService"
 import { ResponseLogin } from '../IAuthService'
 import { AuthService } from "./AuthService"
 import { IGenerateRefreshToken } from '../IGenerateRefreshToken'
-
+jest.useFakeTimers()
 
 //jest.mock('./FindUserService')
 

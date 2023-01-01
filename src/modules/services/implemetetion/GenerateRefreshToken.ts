@@ -1,3 +1,4 @@
+import 'reflect-metadata'
 import { config } from "dotenv";
 import { sign } from "jsonwebtoken";
 import { injectable } from "tsyringe";

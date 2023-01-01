@@ -9,8 +9,10 @@ export class RefreshTokenController{
     }
 
     async handle(request:Request,response:Response):Promise<Response>{
-        const {refreshToken} = request.body
+        const refreshToken =request.cookies['refresh-token']
+    
         const responseToken =await this.refreshTokenService.execute(refreshToken)
+        
         return response.status(200).json(responseToken)
     }
 }

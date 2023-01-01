@@ -2,7 +2,7 @@ import 'reflect-metadata'
 import {config} from 'dotenv'
 import { sign } from "jsonwebtoken";
 import { RefreshToken } from "./RefreshTokenService";
-
+jest.useFakeTimers()
 
 config()
 describe('RefreshTokenService',()=>{

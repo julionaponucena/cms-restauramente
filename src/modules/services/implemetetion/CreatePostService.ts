@@ -1,6 +1,8 @@
+import 'reflect-metadata'
 import {inject,injectable} from 'tsyringe'
 import { ICreatePostService } from "../ICreatePostService";
-import { IPostDTO, IPostRepository } from "../../repository/IPostRespository";
+import {  IPostRepository } from "../../repository/IPostRespository";
+import { ICreatePostDTO } from '../../dtos/CreatePostDto';
 
 @injectable()
 export class CreatePostService implements ICreatePostService{
@@ -11,7 +13,7 @@ export class CreatePostService implements ICreatePostService{
         
     }
 
-    async execute(post: IPostDTO): Promise<void> {
+    async execute(post: ICreatePostDTO): Promise<void> {
         const alredyExist = await this.postRepository.findByTitle(post.title)
 
         if(alredyExist){

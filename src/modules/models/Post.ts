@@ -5,7 +5,7 @@ import { IPostDTO } from "../repository/IPostRespository";
 @Entity("Posts")
 export class Post{
     @ObjectIdColumn()
-    id:ObjectId
+    id:string
     @Column({nullable:true,unique:true})
     title:string
 
@@ -21,7 +21,7 @@ export class Post{
     @Column()
     content:string
 
-    constructor(id:ObjectId,t:string,isP:boolean,metaD:string,metaK:string,c:string){
+    constructor(id:string,t:string,isP:boolean,metaD:string,metaK:string,c:string){
         this.id = id
         this.title = t
         this.isPublicated = isP
@@ -30,10 +30,10 @@ export class Post{
         this.content = c
     }
 
-    update({content,metaKey,title,metaDescription}:IPostDTO):void{
+    /*update({content,metaKey,title,metaDescription}:IPostDTO):void{
         this.content=content
         this.metaKey = metaKey
         this.title = title
         this.metaDescription = metaDescription
-    }
+    }*/
 }

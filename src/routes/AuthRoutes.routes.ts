@@ -3,6 +3,7 @@ import '../shared/container/'
 import { Router } from 'express'
 import authController from '../modules/controllers/AuthController'
 
+
 const authRoutes = Router()
 console.log('chegou routes')
 
