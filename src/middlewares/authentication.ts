@@ -3,8 +3,9 @@ import { verify } from "jsonwebtoken";
 import { AppError } from "../erros/AppError";
 
 export function authentication (request: Request,response: Response, next:NextFunction){
-    const authToken = request.headers['authorization']
+    const authToken = request.headers.authorization
     console.log(authToken)
+    console.log(response.getHeaders())
     if(!authToken){
     
         throw new AppError('token is missing',401)

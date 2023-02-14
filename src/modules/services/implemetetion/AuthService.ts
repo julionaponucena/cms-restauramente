@@ -49,7 +49,7 @@ export class AuthService implements IAuthService{
 
          const token =  sign({},secretAuthToken,{
               subject:user.id,
-              expiresIn:'30s'
+              expiresIn:'20s'
           })
 
           

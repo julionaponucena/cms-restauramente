@@ -19,6 +19,8 @@ export interface IPostRepository{
 
     update(post:IPostDTO):Promise<void>
 
+    findOneBy(params:Partial<Post>):Promise<Post |null>
+
     findById(id:string):Promise<Post |null>
 
     deleteById(post:string):Promise<void>

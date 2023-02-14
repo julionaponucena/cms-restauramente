@@ -20,6 +20,10 @@ export class PostRepository implements IPostRepository{
         return await this.appData.findOneBy({title})
     }
 
+    async findOneBy(params: Partial<Post>):Promise<Post | null>{
+        return await this.appData.findOneBy(params)
+    }
+
     async findById(id:string):Promise<Post |null>{
        
         

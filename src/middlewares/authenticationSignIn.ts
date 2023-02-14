@@ -6,7 +6,7 @@ import { config } from "dotenv";
 config()
 export function authenticationSignIn(request:Request,response:Response,next:NextFunction){
     const signInToken = request.headers.authorization
-
+    console.log(response.getHeaders())
     if(!signInToken){
         throw new AppError('token is missing',401)
     }

@@ -18,7 +18,7 @@ export class AuthController{
     }
 
     async handle(request:Request,response:Response):Promise<Response>{
-        console.log('chamou o método handle')
+        console.log(response.getHeaders())
         if(!this.authService){
             throw new AppError('internal server error',500)
         }
