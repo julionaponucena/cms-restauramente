@@ -3,4 +3,5 @@ export interface ICreatePostDTO{
     content:string
     metaKey?:string
     metaDescription?:string
+    route:string
 }

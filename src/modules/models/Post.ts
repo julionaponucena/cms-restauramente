@@ -21,13 +21,17 @@ export class Post{
     @Column()
     content:string
 
-    constructor(id:string,t:string,isP:boolean,metaD:string,metaK:string,c:string){
+    @Column()
+    route:string
+
+    constructor(id:string,t:string,isP:boolean,metaD:string,metaK:string,c:string,route:string){
         this.id = id
         this.title = t
         this.isPublicated = isP
         this.metaDescription = metaD
         this.metaKey = metaK
         this.content = c
+        this.route = route
     }
 
     /*update({content,metaKey,title,metaDescription}:IPostDTO):void{

@@ -9,7 +9,7 @@ export async function getSchema() {
     const schema =await buildSchema({
         resolvers:[ListPostResolver,FindPostResolver],
         container:{get:(cls)=>container.resolve(cls)},
-        emitSchemaFile:path.resolve(__dirname,'../../../schema.gql')
+        emitSchemaFile:path.resolve(__dirname,'../../schema.gql')
     })
     return schema
 }

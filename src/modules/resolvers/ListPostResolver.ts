@@ -7,13 +7,11 @@ import { ListPostService } from "../services/implemetetion/ListPostService";
 
 
 @Resolver()
-@registry([{token:'postService',useClass:ListPostService}])
 @injectable()
 export class ListPostResolver {
-    constructor(@inject('postService')private  postService?: IListPostService){}
+    constructor(@inject(ListPostService)private  postService: IListPostService){}
     @Query(()=> [Post])
     posts (){
-        if(!this.postService) throw new  Error('')
         return this.postService.execute()
     }
 

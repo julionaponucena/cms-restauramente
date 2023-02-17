@@ -1,5 +1,5 @@
 import { Post } from "../models/Post";
 
 export interface IFindPostService {
-    execute(args:Partial<Post>):Promise<Post |null>
+    execute(post: Partial<Post>):Promise<Post>
 }

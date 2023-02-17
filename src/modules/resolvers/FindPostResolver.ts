@@ -1,11 +1,14 @@
-import { inject, registry } from "tsyringe";
-import { Resolver,Query } from "type-graphql";
+import { inject, injectable, registry } from "tsyringe";
+import { Resolver,Query,Arg, Root, Args } from "type-graphql";
+import { SimpleConsoleLogger } from "typeorm";
+import { PostInput } from "../inputs-types/PostInput";
 import { Post } from "../inputs/Post";
 import { IFindPostService } from "../services/IFindPostService";
 import { FindPostService } from "../services/implemetetion/FindPostService";
 
 @Resolver()
 @registry([{token:'postService',useClass:FindPostService}])
+@injectable()
 export class FindPostResolver {
     constructor(
         @inject('postService')
@@ -13,7 +16,19 @@ export class FindPostResolver {
     ){}
 
     @Query(()=>Post)
-    post(_:any, args :Partial<Post>){
-        return this.postService.execute(args)
+    post(
+        @Arg("post",{validate:false}) post:PostInput
+    ):Promise<Post>{
+        function removeEmpty(obj:any): any {
+            return Object.fromEntries(
+              Object.entries(obj)
+                .filter(([_, v]) => v != null)
+                .map(([k, v]) => [k, v === Object(v) ? removeEmpty(v) : v])
+            );
+          }
+
+          console.log(removeEmpty(post))
+          console.log(post)
+        return this.postService.execute(post)
     }
 }

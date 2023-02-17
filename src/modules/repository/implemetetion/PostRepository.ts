@@ -20,14 +20,17 @@ export class PostRepository implements IPostRepository{
         return await this.appData.findOneBy({title})
     }
 
-    async findOneBy(params: Partial<Post>):Promise<Post | null>{
-        return await this.appData.findOneBy(params)
+    findOneBy(params: Partial<Post>):Promise<Post | null>{
+        
+        console.log({...params,_id:ObjectId(params.id),id:undefined})
+    
+        return this.appData.findOneByOrFail({...params,_id:ObjectId(params.id),id:undefined})
     }
 
     async findById(id:string):Promise<Post |null>{
        
         
-        return await this.appData.findOneBy({_id:new ObjectId(id)})
+        return await this.appData.findOneBy({_id:ObjectId(id)})
     }
 
     async list(): Promise<Post[]> {

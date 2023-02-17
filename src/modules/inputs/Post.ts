@@ -12,6 +12,9 @@ export class Post {
     content:string
 
     @Field()
+    route:string
+
+    @Field()
     isPublicated:boolean
 
     @Field()
@@ -20,12 +23,13 @@ export class Post {
     @Field()
     metaKey:string
 
-    constructor(id:string,t:string,isP:boolean,metaD:string,metaK:string,c:string){
+    constructor(id:string,t:string,isP:boolean,metaD:string,metaK:string,c:string,route:string){
         this.id = id
         this.title = t
         this.isPublicated = isP
         this.metaDescription = metaD
         this.metaKey = metaK
         this.content = c
+        this.route= route
     }
 }
