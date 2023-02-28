@@ -22,9 +22,9 @@ export class PostRepository implements IPostRepository{
 
     findOneBy(params: Partial<Post>):Promise<Post | null>{
         
-        console.log({...params,_id:ObjectId(params.id),id:undefined})
+        
     
-        return this.appData.findOneByOrFail({...params,_id:ObjectId(params.id),id:undefined})
+        return this.appData.findOneByOrFail(params)
     }
 
     async findById(id:string):Promise<Post |null>{

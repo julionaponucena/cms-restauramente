@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">90% </span>
+                <span class="strong">61.9% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>18/20</span>
-            </div>
-        
-            
-            <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
-                <span class="quiet">Branches</span>
-                <span class='fraction'>1/2</span>
+                <span class='fraction'>13/21</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
-                <span class="quiet">Functions</span>
-                <span class='fraction'>1/1</span>
+                <span class="quiet">Branches</span>
+                <span class='fraction'>0/0</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">90% </span>
+                <span class="strong">0% </span>
+                <span class="quiet">Functions</span>
+                <span class='fraction'>0/1</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">61.9% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>18/20</span>
+                <span class='fraction'>13/21</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line medium'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -82,8 +82,8 @@
 <a name='L17'></a><a href='#L17'>17</a>
 <a name='L18'></a><a href='#L18'>18</a>
 <a name='L19'></a><a href='#L19'>19</a>
-<a name='L20'></a><a href='#L20'>20</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<a name='L20'></a><a href='#L20'>20</a>
+<a name='L21'></a><a href='#L21'>21</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -96,12 +96,15 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span></td><td class="text"><pre class="prettyprint lang-js">import { config } from "dotenv";
+<span class="cline-any cline-yes">1x</span></td><td class="text"><pre class="prettyprint lang-js">import 'reflect-metadata'
+import { config } from "dotenv";
 import { sign } from "jsonwebtoken";
 import { injectable } from "tsyringe";
 import { AppError } from "../../../erros/AppError";
@@ -110,15 +113,15 @@ import { IGenerateRefreshToken } from "../IGenerateRefreshToken";
 config()
 @injectable()
 export class GenerateRefreshToken implements IGenerateRefreshToken {
-    execute(id: string): string {
-        const secretToken =process.env.SECRET_REFRESH_TOKEN
-        if(!secretToken)<span class="branch-0 cbranch-no" title="branch not covered" >{</span>
+<span class="fstat-no" title="function not covered" >    execute(id: string): string {</span>
+<span class="cstat-no" title="statement not covered" >        const secretToken =process.env.SECRET_REFRESH_TOKEN</span>
+<span class="cstat-no" title="statement not covered" >        if(!secretToken){</span>
 <span class="cstat-no" title="statement not covered" >            throw new AppError('token missing',500)</span>
 <span class="cstat-no" title="statement not covered" >        }</span>
-        return sign({},secretToken,{
-            subject:id,
-            expiresIn:'1h'
-        }) 
+<span class="cstat-no" title="statement not covered" >        return sign({},secretToken,{</span>
+<span class="cstat-no" title="statement not covered" >            subject:id,</span>
+<span class="cstat-no" title="statement not covered" >            expiresIn:'1h'</span>
+<span class="cstat-no" title="statement not covered" >        }) </span>
     }   
 }</pre></td></tr></table></pre>
 
@@ -127,7 +130,7 @@ export class GenerateRefreshToken implements IGenerateRefreshToken {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-12-22T18:46:12.889Z
+                at 2023-02-18T18:33:49.672Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

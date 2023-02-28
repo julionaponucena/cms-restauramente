@@ -24,7 +24,7 @@ export class AuthController{
         }
         const {email,password} = request.body
         const {token,refreshToken} =await this.authService.login({email,password})
-        response.cookie('refresh-token',refreshToken,{httpOnly:true})
+        response.cookie('refresh-token',refreshToken,{httpOnly:true,sameSite: "none",secure:true,})
         return response.status(200).json({token})
     }
 }
